@@ -1,0 +1,34 @@
+top: search
+top: your favorite cars
+middle: car feed
+
+1:34:00
+
+https://uigradients.com/#Inbox
+change css body
+
+font awesome => i.fa.fas-search
+
+01:41 `it took a while`
+
+01:49:44 `check the ...`; 
+
+01:50:39
+01:56:28;
+
+api:
+https://deividfortuna.github.io/fipe/
+02:02:12
+
+GETS A MAKE.MODEL: 
+const api_url = 'https://parallelum.com.br/fipe/api/v1/carros/marcas/8/modelos';
+async function attempt() {
+  const response = await fetch(api_url);
+  const data = await response.json();
+  console.log(data.modelos[0].nome);
+}
+
+attempt();
+
+
+
