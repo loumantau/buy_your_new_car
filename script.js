@@ -6,7 +6,7 @@ async function getCarModel() {
   car.classList.add('car');
 
   const randomCarNumber = Math.trunc(Math.random() * 3);
-  let carsProperties = {
+  let audiProperties = {
     audiImgs: [
       {
         car1: [
@@ -40,18 +40,20 @@ async function getCarModel() {
         car3: [car3Name, car3Img],
       },
     ],
-  } = carsProperties;
+  } = audiProperties;
   const response = await fetch(api_url);
   const data = await response.json();
+
+  const carName = data.modelos[randomCarNumber].nome;
 
   car.innerHTML = `
             <div class="car-header">
             <span class="feed"> Your feed </span>
             <img
               src="${
-                car1Name === data.modelos[randomCarNumber].nome
+                car1Name === carName
                   ? car1Img
-                  : car2Name === data.modelos[randomCarNumber].nome
+                  : car2Name === carName
                   ? car2Img
                   : car3Img
               }"
@@ -59,7 +61,7 @@ async function getCarModel() {
             />
             </div>
             <div class="car-body">
-            <h4>${`Audi`} ${data.modelos[randomCarNumber].nome}</h4>
+            <h4>${`Audi`} ${carName}</h4>
             <button class="fav-btn">
               <i class="fas fa-heart"></i>
             </button>
