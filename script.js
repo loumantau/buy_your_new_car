@@ -91,8 +91,10 @@ async function getAudis(randomNumber) {
 
   console.log(data.modelos[randomNumber].nome);
 
-  car.querySelector('.car-body .fav-btn').addEventListener('click', () => {
-    alert('hi');
+  const btn = car.querySelector('.car-body .fav-btn');
+
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
   });
   cars.appendChild(car);
 }
