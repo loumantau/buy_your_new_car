@@ -1,12 +1,33 @@
-async function getCarModel() {
+const randomCarNumbers = [];
+
+let min, max, r, n, p;
+
+min = 0;
+max = 2;
+r = 2;
+
+for (let i = 0; i < r; i++) {
+  do {
+    n = Math.floor(Math.random() * (max - min + 1)) + min;
+    p = randomCarNumbers.includes(n);
+    if (!p) {
+      randomCarNumbers.push(n);
+    }
+  } while (p);
+}
+
+console.log(randomCarNumbers);
+const rand1 = randomCarNumbers[0];
+const rand2 = randomCarNumbers[1];
+
+async function getAudis(randomNumber) {
   const api_url =
     'https://parallelum.com.br/fipe/api/v1/carros/marcas/6/modelos';
   const cars = document.getElementById('cars');
   const car = document.createElement('div');
   car.classList.add('car');
 
-  const randomCarNumber = Math.trunc(Math.random() * 3);
-  let carsProperties = {
+  let audiProperties = {
     audiImgs: [
       {
         car1: [
@@ -40,18 +61,20 @@ async function getCarModel() {
         car3: [car3Name, car3Img],
       },
     ],
-  } = carsProperties;
+  } = audiProperties;
   const response = await fetch(api_url);
   const data = await response.json();
+
+  const carName = data.modelos[randomNumber].nome;
 
   car.innerHTML = `
             <div class="car-header">
             <span class="feed"> Your feed </span>
             <img
               src="${
-                car1Name === data.modelos[randomCarNumber].nome
+                car1Name === carName
                   ? car1Img
-                  : car2Name === data.modelos[randomCarNumber].nome
+                  : car2Name === carName
                   ? car2Img
                   : car3Img
               }"
@@ -59,16 +82,20 @@ async function getCarModel() {
             />
             </div>
             <div class="car-body">
-            <h4>${`Audi`} ${data.modelos[randomCarNumber].nome}</h4>
+            <h4>${`Audi`} ${carName}</h4>
             <button class="fav-btn">
               <i class="fas fa-heart"></i>
             </button>
             </div>
   `;
 
-  console.log(data.modelos[randomCarNumber].nome);
+  console.log(data.modelos[randomNumber].nome);
 
+  car.querySelector('.car-body .fav-btn').addEventListener('click', () => {
+    alert('hi');
+  });
   cars.appendChild(car);
 }
 
-getCarModel();
+getAudis(rand1);
+getAudis(rand2);
