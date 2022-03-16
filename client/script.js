@@ -1,3 +1,13 @@
+async function fetchAPI() {
+  const api_url = 'http://localhost:5000/getAll';
+
+  const response = await fetch(api_url);
+  const data = await response.json();
+  console.log(data);
+}
+
+fetchAPI();
+
 const randomCarNumbers = [];
 
 let min, max, r, n, p;
